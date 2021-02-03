@@ -1,0 +1,716 @@
+
+
+ <!-- 
+   Adnan mehrat
+   ondokuz mayıs üniveristesi 
+   yüksek lisan öğrencisi
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/mathjs@8.0.0/lib/browser/math.js"></script>
+
+  <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+<style>
+body {
+  font-family: "Lato", sans-serif !important;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #b4b3b34d;
+  font-family: Helvetica, sans-serif !important;
+}
+.sidenav {
+  height: 100%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #5f5f5f;
+  overflow-x: hidden;
+  padding-top: 20px;
+  box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 2px;
+  text-align:center;
+}
+
+td {
+  background-color: grey !important;
+  border: 1px solid #ddd;
+  color:white;
+}
+
+.head{background-color: white !important;}
+.arr{
+ padding: 8px;
+ background-color: #4CAF50 !important;
+ 
+}
+.arr1{
+ padding: 8px;
+ background-color: white !important;
+  color:black;
+  
+}
+.arr22{
+    border-bottom: 4px solid grey;
+}
+.main {
+   /*margin-left: 200px; Same as the width of the sidenav */
+  font-size: 20px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* The actual timeline (the vertical ruler) */
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -3px;
+}
+
+/* Container around content */
+.container {
+  padding: 10px 40px;
+  position: relative;
+  background-color: inherit;
+  width: 95%;
+}
+
+/* The circles on the timeline */
+.container::after {
+  box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -17px;
+  background-color: #5f5f5f;
+  border: 3px solid #5f5f5f;
+  top: 15px;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+  left: 0;
+}
+
+/* Place the container to the right */
+.right {
+  left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  right: 30px;
+  border: medium solid white;
+  border-width: 10px 0 10px 10px;
+  border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+  content: " ";
+  height: 0;
+  position: absolute;
+  top: 22px;
+  width: 0;
+  z-index: 1;
+  left: 30px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+  left: -16px;
+}
+
+/* The actual content */
+.content {
+  margin-bottom: 40px;
+  padding: 20px 30px;
+  background-color: white;
+  position: relative;
+  border-radius: 6px;
+  box-shadow:0 10px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19) !important;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+  /* Place the timelime to the left */
+  .timeline::after {
+  left: 31px;
+  }
+  
+  /* Full-width containers */
+  .container {
+  width: 100%;
+  padding-left: 70px;
+  padding-right: 25px;
+  }
+  
+  /* Make sure that all arrows are pointing leftwards */
+  .container::before {
+  left: 60px;
+  border: medium solid white;
+  border-width: 10px 10px 10px 0;
+  border-color: transparent white transparent transparent;
+  }
+
+  /* Make sure all circles are at the same spot */
+  .left::after, .right::after {
+  left: 15px;
+  }
+  
+  /* Make all right containers behave like the left ones */
+  .right {
+  left: 0%;
+  }
+}
+
+a{
+    cursor: pointer;
+}
+.a{
+    color:#7be77f !important;
+}
+.progress-container {
+  width: 100%;
+  height: 8px;
+  background: #ccc;
+  position: absolute;
+  bottom: 0px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #4caf50;
+  width: 0%;
+}
+
+.btn2 {
+  border: none;
+  color: white;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.info {background-color: #2196F3;} /* Blue */
+.info:hover {background: #0b7dda;}
+.success1 {background-color: #4CAF50;} /* Green */
+.success1:hover {background-color: #46a049;} /* Green */
+.success {background-color: #4CAF50;} /* Green */
+.success:hover {background-color: #0b7dda;}
+.color {background-color: #0b7dda !important;}
+.btn1 {
+  border: none;
+  margin:2px;
+  color: white;
+  padding: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  float:left;
+}
+
+@media (min-width: 768px){
+  .modal-dialog {
+      width: 72%;
+      margin: 30px auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
+.modal-backdrop.in {
+    filter: alpha(opacity=50);
+    opacity: 0.7 !important;
+}
+
+
+/* Three column layout */
+.side {
+  float: left;
+  width: 15%;
+  margin-top:10px;
+}
+
+.middle {
+  margin-top:10px;
+  float: left;
+  width: 70%;
+}
+
+/* Place text to the right */
+.right {
+  text-align: right;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: #f1f1f1;
+  text-align: center;
+  color: white;
+}
+
+/* Individual bars */
+.bar-1 {height: 18px; background-color: #4CAF50;}
+.bar-2 {height: 18px; background-color: #2196F3;}
+
+@media (max-width: 400px) {
+  .side, .middle {
+    width: 100%;
+  }
+  .right {
+    display: none;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+
+<div class="main">
+     
+       
+        
+        <div id="s5" class="container left" >
+            <div  class="content">
+              <h2> Code</h2>
+              <figure>
+                <pre>
+                  <code >
+                    var kat;
+                    var xi;
+                    var h;
+                    var X;                  // Başlangıç Parametreler
+                    var xiekesi1;
+                    var xiarti1;
+                    var istenen;            // max yada min
+
+                    xi;                     //  İstenen aralığın sol tarafı
+                    X=;                     //  İstenen aralığın sağ tarafı
+                    xiekesi1 =xi-h ;        //  xi-1  hesaplanması
+                    xiarti1 = xi+h ;        //  xi+1  hesaplanması
+                    xValues = [xiekesi1,xi,xiarti1]; //  x leri içeren bir dizi 
+
+                    yValues = xValues.map(function (x) {
+                      return expr.evaluate({x: x});    // f(x) leri hesaplayan metod
+                    })
+                    yValuesderivative = xValues.map(function (x) {
+                        return expr1.evaluate({x: x}); // Emin olmak için fَ (x) leri hesaplayan metod  
+                    })
+                    
+                    while (true) {
+                      if(xiarti1 >= X){
+                          alert("istenen bulunmadı");    // eğer xi aralık dışında ise çık 
+                          break ;
+                      }else{
+                          xiekesi1=xi;
+                          xi=xiarti1;          // değilse xi , x-i ve x+1 hesapla
+                          xiarti1=xi+(kat*h);
+
+                          var xValues = [xiekesi1,xi,xiarti1];        //  x leri içeren bir dizi 
+                              yValues = xValues.map(function (x) {
+                              return expr.evaluate({x: x})              // f(x) leri hesaplayan metod
+                          })
+                          var yValuesderivative = xValues.map(function (x) {
+                              return expr1.evaluate({x: x})            // Emin olmak için fَ (x) leri hesaplayan metod  
+                          })
+                          kat = kat*2 ;            //   arancak aralık büyümesi
+                      }
+
+                      if(yValues[1] > yValues[0] && yValues[1] > yValues[2] && $("#istenen").val()=="max"){
+                          $("#bulundu").remove();
+                          alert("max bulundu");     //  f(xi) > f(xi-1) && f(xi) > f(xi+1)   sağlanırsa max bulundu yazdır
+                          break ;
+                      }else if(yValues[1] < yValues[0] && yValues[1] < yValues[2] && $("#istenen").val()=="min"){
+                          $("#bulundu").remove();
+                          alert("min bulundu");      //  f(xi) < f(xi-1) && f(xi) < f(xi+1)   sağlanırsa max bulundu yazdır
+                          break ;
+                      }
+                    }
+
+                  </code>
+                </pre>
+              </figure>
+            </div>
+        </div>
+
+        
+       
+     
+        <div id="s4" class="container left" style="display: block;">
+            <div  class="content">
+              <h2>Starting Parameters :</h2>
+              <br>
+                 <ul>
+                  <li><p style="float: left;"><strong >F(x) = </strong></p>
+                    <div class="form-group" style="width: 17.9%; float: left;margin-left: 20px;">
+                        <input type="text" class="form-control" id="eq" name="username" value="x^2"> 
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Function </div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >a = </strong></p>
+                    <div class="form-group" style="width: 20%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="a" name="username" value="-10">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> The range from which the function starts for drawing </div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >x - x <strong style="font-size:10px;">i-1</strong> </strong></p>
+                    <div class="form-group" style="width: 17.8%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="fs" name="username" value="0.1">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Jump range for x of the function for drawing </div>
+                    <br><br>
+                  </li>
+                  <hr>
+
+                  <li><p style="float: left;"><strong >x <strong style="font-size:10px;">i</strong> = </strong></p>
+                    <div class="form-group" style="width: 19.6%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="xi" name="username" value="-5">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Starting point for search </div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >X = </strong></p>
+                    <div class="form-group" style="width: 20%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="X" name="username" value="10">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> End point for search and for function drawing </div>
+                    <br><br>
+                  </li>
+
+                  <li><p style="float: left;"><strong >h = </strong></p>
+                    <div class="form-group" style="width: 20%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="h" name="username" value="0.1">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Jump range for search</div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >Factor = </strong></p>
+                    <div class="form-group" style="width: 16%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="kat" name="username" value="1">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Jump range faktor for search </div>
+                    <br><br>
+                  </li>
+                 
+                  <li><p style="float: left;"><strong >Error = </strong></p>
+                    <div class="form-group" style="width: 17%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="e" name="username" value="0.01">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Accepted error value </div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >İteration = </strong></p>
+                    <div class="form-group" style="width: 14.5%; float: left;margin-left: 20px;">
+                        <input type="number" min="-1000" max="1000" class="form-control" id="iter" name="username" value="20">
+                    </div>
+                    <div class="form-group" style=" float: left;margin-left: 20px;"> Number of iterations </div>
+                    <br><br>
+                  </li>
+                  <li><p style="float: left;"><strong >Wanted = </strong></p>
+                  <div class="form-group" style="width: 15.2%; float: left;margin-left: 20px;">
+                    <select class="form-control" id="istenen">
+                      <option value="Max">max</option>
+                      <option value="Min">min</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style=" float: left;margin-left: 20px;"> Maxima or minima options </div>
+                </li>
+                  <button class="btn2 info" style="float:right" onclick="draw()">Draw</button>
+                  <br><br>
+                </ul>
+                <div id="plot" class="overflow-x: scroll;"></div>
+
+
+                
+                </div>
+
+
+            
+        </div>
+
+
+        <div id="s6" class="container left">
+            <div  class="content" id="tables">
+              <h2 style="float:left">Example</h2> <button id="itera" class="btn2 info" style="float:right" onclick="bracket()">Start</button>
+
+              <br><br>
+
+          
+            </div>
+        </div>
+
+
+      <br><br><br><br><br><br><br><br><br>
+      <div id="s9" class="container left" >
+        <div  class="content" >
+          <h2 style="text-align: center;">Thanks!</h2> 
+          <h4 style="text-align: center;">Adnan Mehrat</h5> 
+        </div>
+      </div>
+       
+
+
+      <br><br><br>   <br><br><br><br>  
+    </div>
+
+    
+   
+    <script>
+    var table = 0 ;
+    var control = 0 ; 
+    var counter=0 ; 
+    var btncontol=0;
+    var error = 100;
+
+    var kat;
+    var xi;
+    var h;
+    var X;
+    var xi_1;
+    var xi_2;
+    var istenen ; 
+    var e ; 
+    
+    
+    function bracket() {
+        kat = parseFloat($("#kat").val()); 
+        h= parseFloat($("#h").val());
+        e = parseFloat($("#e").val());
+        xi= parseFloat($("#xi").val());
+        X= parseFloat($("#X").val());
+        iter= parseFloat($("#iter").val());
+        
+        xi=xi;
+        xi_1 = xi+h ;
+        xi_2 = xi_1+h+h ;
+        istenen = $("#istenen").val();
+
+
+        counter++;
+        xValues = [xi,xi_1,xi_2];
+            yValues = xValues.map(function (x) {
+            return expr.evaluate({x: x});
+        })
+        yValuesderivative = xValues.map(function (x) {
+            return expr1.evaluate({x: x});
+        })
+
+       
+
+        while(error > e ){
+            
+            $("#tables").append(
+                '<br>'+
+                '<div style="overflow-x:auto;" class="removeme">'+
+                    '<table id="table_'+table+'">'+
+                    '<tr>'+
+                        '<td class="" id="iter">'+counter+'. İteration</td>'+
+                        '<td class="" style="font-size:25px;">x<strong style="font-size:12px;">i-1</strong></td>'+
+                        '<td class="" style="font-size:25px;">x</td>'+
+                        '<td class="" style="font-size:25px;">x<strong style="font-size:12px;">i+1</strong></td>'+
+                    '</tr>'+
+                            '<tr>'+
+                            '<td class="arr1">X</td>'+
+                            '<td class="arr1">'+xi+'</td>'+
+                            '<td class="arr1">'+xi_1+'</td>'+
+                            '<td class="arr1">'+xi_2+'</td>'+
+                        '</tr>'+
+                        '<tr>'+
+                            '<td class="arr1">F(x)</td>'+
+                            '<td class="arr1">'+yValues[0]+'</td>'+
+                            '<td class="arr1">'+yValues[1]+'</td>'+
+                            '<td class="arr1">'+yValues[2]+'</td>'+
+                        '</tr>'+
+                        '<tr style="border:2px red">'+
+                            '<td class="arr1 arr22">F<strong style="font-size:29px;">َ   َ</strong>(x)</td>'+
+                            '<td class="arr1 arr22">'+yValuesderivative[0]+'</td>'+
+                            '<td class="arr1 arr22">'+yValuesderivative[1]+'</td>'+
+                            '<td class="arr1 arr22">'+yValuesderivative[2]+'</td>'+
+                        '</tr><hr>'+
+                        '</table>'+
+                    '</div>'
+                );  
+
+                
+                console.log(error);
+                if(yValues[1] > yValues[0] && yValues[1] > yValues[2] && $("#istenen").val()=="Max"){
+                    //alert(error +"=>"+e);
+
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"> '+istenen+' found in this range ['+xi+' , '+X+'] </strong>');
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"><br> ['+xi_2+' - ('+xi+')] = '+error+' => ' +e+ ' </strong>');
+                    X=xi_2;
+                    xi_1=xi+h;
+                    xi_2=xi+(2*h);
+                    kat=1;
+                }else if(yValues[1] < yValues[0] && yValues[1] < yValues[2] && $("#istenen").val()=="Min"){
+                    //alert(error +"=>"+e);
+
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"> '+istenen+' found in this range ['+xi+' , '+X+']</strong>');
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"><br> ['+xi_2+' - ('+xi+')] = '+error+' => ' +e+ ' </strong>');
+                   
+                    X=xi_2;
+                    xi_1=xi+h;
+                    xi_2=xi+(2*h);
+                    kat=1;
+                }else if (xi_2 >= X){
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"> <br>'+" x<strong style='font-size:12px;'>i+1</strong> > X "+' :Out of range  </strong>');
+                    $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"> <br> No '+istenen+' found in this range </strong>');
+                    break;
+                }else{
+                    
+                    xi=xi_1;
+                    xi_1=xi_2;
+                    xi_2=xi_1+(kat*h);
+                    
+                }
+                var xValues = [xi,xi_1,xi_2];
+                        yValues = xValues.map(function (x) {
+                        return expr.evaluate({x: x})
+                    })
+                var yValuesderivative = xValues.map(function (x) {
+                    return expr1.evaluate({x: x})
+                })
+
+                
+                kat = kat*2 ;
+                table++;
+            
+           
+            counter++;
+            if(counter-1 > iter){
+              $("#tables").append('<strong id="bulundu" style="text-align: center;color : red " class="removeme"> <br>  İteration : Out of range <hr> </strong>');
+              break;
+            } 
+
+            error = Math.abs(xi_2-xi) ;
+        }
+
+
+        
+    }
+
+
+    
+
+    function draw() {
+        $('.removeme ').each(function(i) {
+             $(this).remove();
+        });
+        btncontol==0;
+        //alert(parseInt($("#x").val())+parseInt($("#a").val()) + parseFloat($("#h").val()));
+
+      try {
+        // compile the expression once
+         expression = document.getElementById('eq').value;
+         expr = math.compile(expression);
+         expr1 = math.derivative(expression, 'x');
+      
+        // evaluate the expression repeatedly for different values of x
+        const xValues = math.range(parseInt($("#a").val()) , parseInt($("#X").val()) , parseFloat($("#fs").val())).toArray()
+        const yValues = xValues.map(function (x) {
+          return expr.evaluate({x: x})
+        })
+        
+        // render the plot using plotly
+        const trace1 = {
+          x: xValues,
+          y: yValues,
+          type: 'scatter'
+        }
+        const data = [trace1]
+        Plotly.newPlot('plot', data)
+      }
+      catch (err) {
+        console.error(err)
+        alert(err)
+      }
+
+    }
+    draw();
+  
+    
+  </script>
+   
+</body>
+</html> 
